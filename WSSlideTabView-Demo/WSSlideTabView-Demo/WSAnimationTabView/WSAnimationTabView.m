@@ -30,8 +30,6 @@ static NSInteger WSAnimationTabViewItemTag = 101;
 {
     self = [super initWithFrame:frame];
     if (self) {
- 
-        self.backgroundColor = [UIColor yellowColor];
         //添加ScrollView
         [self addSubview:self.scrollView];
         
@@ -93,4 +91,11 @@ static NSInteger WSAnimationTabViewItemTag = 101;
 }
 
 
+- (UIView *)indicatorView
+{
+    if (!_indicatorView) {
+        _indicatorView = [[UIView alloc] init];
+    }
+    return _indicatorView;
+}
 @end
