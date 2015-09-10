@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.titleLabel.layer.cornerRadius = 30 / 2;
+    self.titleLabel.layer.cornerRadius = 24 / 2;
     self.titleLabel.layer.masksToBounds = YES;
 }
 

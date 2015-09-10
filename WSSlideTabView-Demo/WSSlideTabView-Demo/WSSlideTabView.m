@@ -24,10 +24,6 @@
 @property (nonatomic, strong) UIView *indicatorView;
 
 //dataSource
-@property (nonatomic, strong) WSSlideTabViewDataSource *backDataSource;
-
-
-//dataSource
 @property (nonatomic, strong) WSSlideTabViewDataSource *dataSource;
 
 ///存放model
@@ -56,14 +52,7 @@
 #pragma mark - UICollectionView Delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView.tag == WSSlideTabBackCollectionTag) { //backCollectionTag
-        
-    } else {
-
-//        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-        
-    }
+    [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 
@@ -88,7 +77,7 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
-        flowLayout.itemSize = CGSizeMake(67, self.bounds.size.height);
+        flowLayout.itemSize = CGSizeMake(WSSlideTabItemWidth + 10, self.bounds.size.height);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
         _collectionView.dataSource = self.dataSource;

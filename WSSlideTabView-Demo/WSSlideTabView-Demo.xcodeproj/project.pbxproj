@@ -18,6 +18,9 @@
 		52060AD71BA14E520062AD60 /* WSSlideTabViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AD61BA14E520062AD60 /* WSSlideTabViewDataSource.m */; };
 		52060ADB1BA14EBE0062AD60 /* WSSlideTabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AD91BA14EBE0062AD60 /* WSSlideTabCell.m */; };
 		52060ADC1BA14EBE0062AD60 /* WSSlideTabCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52060ADA1BA14EBE0062AD60 /* WSSlideTabCell.xib */; };
+		52060AE11BA184B20062AD60 /* WSAnimationTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE01BA184B20062AD60 /* WSAnimationTabView.m */; };
+		52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */; };
+		52060AE81BA18AFB0062AD60 /* WSAnimationItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,12 @@
 		52060AD91BA14EBE0062AD60 /* WSSlideTabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSSlideTabCell.m; sourceTree = "<group>"; };
 		52060ADA1BA14EBE0062AD60 /* WSSlideTabCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WSSlideTabCell.xib; sourceTree = "<group>"; };
 		52060ADD1BA152F00062AD60 /* WSSlideTabViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WSSlideTabViewHeader.h; sourceTree = "<group>"; };
+		52060ADF1BA184B20062AD60 /* WSAnimationTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationTabView.h; path = WSAnimationTabView/WSAnimationTabView.h; sourceTree = "<group>"; };
+		52060AE01BA184B20062AD60 /* WSAnimationTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationTabView.m; path = WSAnimationTabView/WSAnimationTabView.m; sourceTree = "<group>"; };
+		52060AE31BA18A430062AD60 /* WSAnimationTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationTabButton.h; path = WSAnimationTabView/WSAnimationTabButton.h; sourceTree = "<group>"; };
+		52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationTabButton.m; path = WSAnimationTabView/WSAnimationTabButton.m; sourceTree = "<group>"; };
+		52060AE61BA18AFB0062AD60 /* WSAnimationItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationItemView.h; path = WSAnimationTabView/WSAnimationItemView.h; sourceTree = "<group>"; };
+		52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationItemView.m; path = WSAnimationTabView/WSAnimationItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,14 +106,8 @@
 				52060AB11BA14CC70062AD60 /* AppDelegate.m */,
 				52060AB31BA14CC70062AD60 /* ViewController.h */,
 				52060AB41BA14CC70062AD60 /* ViewController.m */,
-				52060ADD1BA152F00062AD60 /* WSSlideTabViewHeader.h */,
-				52060AD21BA14CEE0062AD60 /* WSSlideTabView.h */,
-				52060AD31BA14CEE0062AD60 /* WSSlideTabView.m */,
-				52060AD51BA14E520062AD60 /* WSSlideTabViewDataSource.h */,
-				52060AD61BA14E520062AD60 /* WSSlideTabViewDataSource.m */,
-				52060AD81BA14EBE0062AD60 /* WSSlideTabCell.h */,
-				52060AD91BA14EBE0062AD60 /* WSSlideTabCell.m */,
-				52060ADA1BA14EBE0062AD60 /* WSSlideTabCell.xib */,
+				52060AE21BA184BD0062AD60 /* WSAnimationTabView */,
+				52060ADE1BA17C950062AD60 /* WSSlideTabView */,
 				52060AB61BA14CC70062AD60 /* Main.storyboard */,
 				52060AB91BA14CC70062AD60 /* Images.xcassets */,
 				52060ABB1BA14CC70062AD60 /* LaunchScreen.xib */,
@@ -137,6 +140,34 @@
 				52060AC71BA14CC70062AD60 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52060ADE1BA17C950062AD60 /* WSSlideTabView */ = {
+			isa = PBXGroup;
+			children = (
+				52060ADD1BA152F00062AD60 /* WSSlideTabViewHeader.h */,
+				52060AD21BA14CEE0062AD60 /* WSSlideTabView.h */,
+				52060AD31BA14CEE0062AD60 /* WSSlideTabView.m */,
+				52060AD51BA14E520062AD60 /* WSSlideTabViewDataSource.h */,
+				52060AD61BA14E520062AD60 /* WSSlideTabViewDataSource.m */,
+				52060AD81BA14EBE0062AD60 /* WSSlideTabCell.h */,
+				52060AD91BA14EBE0062AD60 /* WSSlideTabCell.m */,
+				52060ADA1BA14EBE0062AD60 /* WSSlideTabCell.xib */,
+			);
+			name = WSSlideTabView;
+			sourceTree = "<group>";
+		};
+		52060AE21BA184BD0062AD60 /* WSAnimationTabView */ = {
+			isa = PBXGroup;
+			children = (
+				52060ADF1BA184B20062AD60 /* WSAnimationTabView.h */,
+				52060AE01BA184B20062AD60 /* WSAnimationTabView.m */,
+				52060AE61BA18AFB0062AD60 /* WSAnimationItemView.h */,
+				52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */,
+				52060AE31BA18A430062AD60 /* WSAnimationTabButton.h */,
+				52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */,
+			);
+			name = WSAnimationTabView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,11 +271,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52060AE11BA184B20062AD60 /* WSAnimationTabView.m in Sources */,
 				52060AD41BA14CEE0062AD60 /* WSSlideTabView.m in Sources */,
 				52060AB51BA14CC70062AD60 /* ViewController.m in Sources */,
 				52060AD71BA14E520062AD60 /* WSSlideTabViewDataSource.m in Sources */,
 				52060AB21BA14CC70062AD60 /* AppDelegate.m in Sources */,
 				52060AAF1BA14CC60062AD60 /* main.m in Sources */,
+				52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */,
+				52060AE81BA18AFB0062AD60 /* WSAnimationItemView.m in Sources */,
 				52060ADB1BA14EBE0062AD60 /* WSSlideTabCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +476,7 @@
 				52060ACE1BA14CC70062AD60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52060ACF1BA14CC70062AD60 /* Build configuration list for PBXNativeTarget "WSSlideTabView-DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +485,7 @@
 				52060AD11BA14CC70062AD60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
