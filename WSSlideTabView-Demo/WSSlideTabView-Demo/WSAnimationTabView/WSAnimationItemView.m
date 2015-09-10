@@ -10,7 +10,7 @@
 
 @interface WSAnimationItemView ()
 
-@property (nonatomic, strong) WSAnimationTabButton *tabButton;
+//@property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
@@ -21,9 +21,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-//        [self addSubview:self.tabButton];
-//        self.backgroundColor = [UIColor blueColor];
-
+        //set font
+        [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        //set title color
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        
     }
     return self;
 }
@@ -31,11 +34,13 @@
 
 - (void)setItemTitle:(NSString *)title
 {
-    [self setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self setTitle:title forState:UIControlStateNormal];
     
 }
-
+//- (CGRect)titleRectForContentRect:(CGRect)contentRect
+//{
+//    return CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+//}
 #pragma mark - Init
 
 

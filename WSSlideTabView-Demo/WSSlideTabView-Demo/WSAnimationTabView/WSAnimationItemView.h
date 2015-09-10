@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WSAnimationTabButton.h"
 
-@interface WSAnimationItemView : UIButton
+@interface WSAnimationItemView : WSAnimationTabButton
 
 
 - (void)setItemTitle: (NSString *)title;

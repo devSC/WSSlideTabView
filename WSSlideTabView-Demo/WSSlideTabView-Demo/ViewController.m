@@ -17,23 +17,42 @@
 @end
 
 @implementation ViewController
+{
+    NSArray *_array;
+    WSSlideTabView *slideTabView;
+    WSAnimationTabView *animationTabView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造"];
-    WSSlideTabView *slideTabView = [[WSSlideTabView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 44)];
+//    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造"];
+      NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类"];
+    _array = array;
+    
+    slideTabView = [[WSSlideTabView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 44)];
     [self.view addSubview:slideTabView];
     
     [slideTabView setSlideModels:array];
     
     
-    WSAnimationTabView *animationTabView = [[WSAnimationTabView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 44)];
+    animationTabView = [[WSAnimationTabView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 44)];
     [self.view addSubview:animationTabView];
-    [animationTabView setItemWidth:67];
+//    [animationTabView setItemWidth:67];
     [animationTabView setTabModelArray:array];
 
     
+}
+- (IBAction)changeItem:(id)sender {
+    NSInteger arc = arc4random() %6;
+    NSMutableArray *array = [@[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类"] mutableCopy];
+    [array removeObjectAtIndex:arc];
+    
+    [slideTabView setSlideModels:array];
+    [animationTabView setTabModelArray:array];
+
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

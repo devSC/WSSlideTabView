@@ -21,6 +21,8 @@
 		52060AE11BA184B20062AD60 /* WSAnimationTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE01BA184B20062AD60 /* WSAnimationTabView.m */; };
 		52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */; };
 		52060AE81BA18AFB0062AD60 /* WSAnimationItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */; };
+		FED763371BA1BA1200DA0C5F /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = FED763361BA1BA1200DA0C5F /* UIView+Utils.m */; };
+		FED7633A1BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = FED763391BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,10 @@
 		52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationTabButton.m; path = WSAnimationTabView/WSAnimationTabButton.m; sourceTree = "<group>"; };
 		52060AE61BA18AFB0062AD60 /* WSAnimationItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationItemView.h; path = WSAnimationTabView/WSAnimationItemView.h; sourceTree = "<group>"; };
 		52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationItemView.m; path = WSAnimationTabView/WSAnimationItemView.m; sourceTree = "<group>"; };
+		FED763351BA1BA1200DA0C5F /* UIView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utils.h"; sourceTree = "<group>"; };
+		FED763361BA1BA1200DA0C5F /* UIView+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utils.m"; sourceTree = "<group>"; };
+		FED763381BA1BB8A00DA0C5F /* WSAnimationIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationIndicatorView.h; path = WSAnimationTabView/WSAnimationIndicatorView.h; sourceTree = "<group>"; };
+		FED763391BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationIndicatorView.m; path = WSAnimationTabView/WSAnimationIndicatorView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +166,12 @@
 		52060AE21BA184BD0062AD60 /* WSAnimationTabView */ = {
 			isa = PBXGroup;
 			children = (
+				FED763351BA1BA1200DA0C5F /* UIView+Utils.h */,
+				FED763361BA1BA1200DA0C5F /* UIView+Utils.m */,
 				52060ADF1BA184B20062AD60 /* WSAnimationTabView.h */,
 				52060AE01BA184B20062AD60 /* WSAnimationTabView.m */,
+				FED763381BA1BB8A00DA0C5F /* WSAnimationIndicatorView.h */,
+				FED763391BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m */,
 				52060AE61BA18AFB0062AD60 /* WSAnimationItemView.h */,
 				52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */,
 				52060AE31BA18A430062AD60 /* WSAnimationTabButton.h */,
@@ -273,12 +283,14 @@
 			files = (
 				52060AE11BA184B20062AD60 /* WSAnimationTabView.m in Sources */,
 				52060AD41BA14CEE0062AD60 /* WSSlideTabView.m in Sources */,
+				FED7633A1BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m in Sources */,
 				52060AB51BA14CC70062AD60 /* ViewController.m in Sources */,
 				52060AD71BA14E520062AD60 /* WSSlideTabViewDataSource.m in Sources */,
 				52060AB21BA14CC70062AD60 /* AppDelegate.m in Sources */,
 				52060AAF1BA14CC60062AD60 /* main.m in Sources */,
 				52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */,
 				52060AE81BA18AFB0062AD60 /* WSAnimationItemView.m in Sources */,
+				FED763371BA1BA1200DA0C5F /* UIView+Utils.m in Sources */,
 				52060ADB1BA14EBE0062AD60 /* WSSlideTabCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,8 +10,17 @@
 
 @interface WSAnimationTabView : UIView
 
-@property (nonatomic, assign) CGFloat itemWidth;
+//@property (nonatomic, assign) CGFloat itemWidth;
+
+@property (nonatomic, strong) UIFont *animationLabelFont;
+
 
 - (void)setTabModelArray: (NSArray *)array;
+
+@end
+
+@protocol WSAnimationTabViewDelegate <NSObject>
+
+//- (void)wstabViewDidSelectedItem: ()
 
 @end
