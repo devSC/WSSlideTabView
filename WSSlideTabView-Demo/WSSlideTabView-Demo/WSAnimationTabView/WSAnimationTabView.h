@@ -19,6 +19,10 @@
 
 @property (nonatomic, strong) UIColor *selectTitleColor; //Default white color
 
+@property (nonatomic, strong) UIColor *scrollViewBackgroundColor; //Default white
+
+@property (nonatomic, strong) UIColor *indicatorBackgroundColor; //Default red
+
 @property (nonatomic, weak) id<WSAnimationTabViewDelegate> delegate;
 
 - (void)setTabModelArray: (NSArray *)array;

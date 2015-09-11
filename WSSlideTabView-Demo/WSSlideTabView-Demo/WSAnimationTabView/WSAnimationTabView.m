@@ -331,6 +331,10 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
     [self refreshView];
 }
 
+- (void)setScrollViewBackgroundColor:(UIColor *)scrollViewBackgroundColor
+{
+    self.scrollView.backgroundColor = scrollViewBackgroundColor;
+}
 
 #pragma mark - Getter
 - (UIScrollView *)scrollView
@@ -339,6 +343,7 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.bounces = NO;
     }
     return _scrollView;
 }
@@ -352,6 +357,8 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
 //        _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(0, 0, [self itemWidthAtIndex:0] , self.height)];
         _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(self.width, 0, [self itemWidthAtIndex:0] , self.height)];
         _indicatorView.tag = WSAnimationTabIndicatorViewTag;
+        _indicatorView.cornerBackGroundViewColor = self.indicatorBackgroundColor;
+
     }
     return _indicatorView;
 }
