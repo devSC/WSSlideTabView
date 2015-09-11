@@ -20,24 +20,46 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59u-d2-b9B">
                                 <rect key="frame" x="26" y="580" width="323" height="30"/>
-                                <color key="backgroundColor" red="0.93333727899999996" green="0.93333727899999996" blue="0.93333727899999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176470588238" green="0.3411764705882353" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="ChangeItem">
-                                    <color key="titleColor" white="0.36847245070000001" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="changeItem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2jG-TI-5ef"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wBU-Ms-0qf" customClass="WSAnimationTabView">
+                                <rect key="frame" x="0.0" y="485" width="375" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="QFf-m5-0d4"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lode from Nib:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bt-ar-bQ2">
+                                <rect key="frame" x="10" y="466" width="87" height="16"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wBU-Ms-0qf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="131-3o-kgt"/>
+                            <constraint firstItem="59u-d2-b9B" firstAttribute="top" secondItem="wBU-Ms-0qf" secondAttribute="bottom" constant="55" id="6TJ-z0-z5E"/>
                             <constraint firstItem="59u-d2-b9B" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="DeY-g6-xAt"/>
+                            <constraint firstAttribute="trailing" secondItem="wBU-Ms-0qf" secondAttribute="trailing" id="HRT-xy-PqI"/>
+                            <constraint firstItem="4bt-ar-bQ2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-6" id="aL5-ox-JPT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="59u-d2-b9B" secondAttribute="trailing" constant="10" id="bh7-0C-ra8"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="59u-d2-b9B" secondAttribute="bottom" constant="57" id="hkW-ZG-2CP"/>
+                            <constraint firstItem="wBU-Ms-0qf" firstAttribute="top" secondItem="4bt-ar-bQ2" secondAttribute="bottom" constant="3" id="wzJ-uy-Oy2"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="animationTabView" destination="wBU-Ms-0qf" id="vju-5h-IkP"/>
+                        <outlet property="nibTabView" destination="wBU-Ms-0qf" id="t1H-2M-wBN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

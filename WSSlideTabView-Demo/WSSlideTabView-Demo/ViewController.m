@@ -10,9 +10,12 @@
 #import "WSSlideTabView.h"
 
 #import "WSAnimationTabView.h"
+#import "WSAnimationItemModel.h"
 
 
-@interface ViewController ()
+@interface ViewController ()<WSAnimationTabViewDelegate>
+
+@property (weak, nonatomic) IBOutlet WSAnimationTabView *nibTabView;
 
 @end
 
@@ -25,32 +28,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-//    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造"];
-      NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"粘土/陶艺", @"刺绣编织", @"创意DIY", @"手工皮具", @"羊毛毡", @"电子科技", @"美容护肤"];
+    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"粘土/陶艺", @"刺绣编织", @"创意DIY", @"手工皮具", @"羊毛毡", @"电子科技", @"美容护肤"];
+    
+    NSMutableArray *mArray = [NSMutableArray array];
+    
+    for (NSString *str in array) {
+        WSAnimationItemModel *model = [[WSAnimationItemModel alloc] init];
+        model.titleName = str;
+        [mArray addObject:model];
+    }
     
     slideTabView = [[WSSlideTabView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 44)];
     [self.view addSubview:slideTabView];
     
     [slideTabView setSlideModels:array];
     
-    
     animationTabView = [[WSAnimationTabView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 44)];
     [self.view addSubview:animationTabView];
-//    [animationTabView setItemWidth:67];
-    [animationTabView setTabModelArray:array];
+//    animationTabView.delegate = self;
+
+    
+    [animationTabView setTabModelArray:mArray];
+    
+
 
     
 }
 - (IBAction)changeItem:(id)sender {
-    NSInteger arc = arc4random() %6;
-    NSMutableArray *array = [@[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类"] mutableCopy];
-    [array removeObjectAtIndex:arc];
     
-    [slideTabView setSlideModels:array];
-    [animationTabView setTabModelArray:array];
-
+    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"粘土/陶艺", @"刺绣编织", @"创意DIY", @"手工皮具", @"羊毛毡", @"电子科技", @"美容护肤"];
     
+    NSMutableArray *mArray = [NSMutableArray array];
+    
+    for (NSString *str in array) {
+        WSAnimationItemModel *model = [[WSAnimationItemModel alloc] init];
+        model.titleName = str;
+        [mArray addObject:model];
+    }
 
+//    [mArray removeObjectAtIndex:arc];
+//    [animationTabView setTabModelArray:mArray];
+    //    [animationTabView setItemWidth:67];
+//    [animationTabView setTabModelArray:mArray];
+    [self.nibTabView setTabModelArray:mArray];
+}
+
+- (void)animationTabViewDidSelectedItem:(id<WSAnimationItemProtocol>)item
+{
+    WSAnimationItemModel *model = item;
+    NSLog(@"item: %@", model.titleName);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WSAnimationItemProtocol.h"
+
+@protocol WSAnimationTabViewDelegate;
 
 @interface WSAnimationTabView : UIView
 
-//@property (nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, strong) UIFont *animationLabelFont; //Default is system size 12
 
-@property (nonatomic, strong) UIFont *animationLabelFont;
+@property (nonatomic, strong) UIColor *normalTitleColor; //Default red color
 
+@property (nonatomic, strong) UIColor *selectTitleColor; //Default white color
+
+@property (nonatomic, weak) id<WSAnimationTabViewDelegate> delegate;
 
 - (void)setTabModelArray: (NSArray *)array;
 
@@ -21,6 +27,6 @@
 
 @protocol WSAnimationTabViewDelegate <NSObject>
 
-//- (void)wstabViewDidSelectedItem: ()
+- (void)animationTabViewDidSelectedItem: (id<WSAnimationItemProtocol>)item;
 
 @end

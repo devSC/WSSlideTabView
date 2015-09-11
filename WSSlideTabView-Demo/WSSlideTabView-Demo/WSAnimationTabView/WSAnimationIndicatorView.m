@@ -24,7 +24,8 @@ static CGFloat WSAnimationEdgeHeight = 20;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+//        self.backgroundColor = [UIColor blueColor];
+
         self.cornerBackGroundViewColor = [UIColor redColor];
         [self addSubview:self.cornerView];
         

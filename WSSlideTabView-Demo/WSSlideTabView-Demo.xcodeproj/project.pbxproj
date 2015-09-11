@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52024E051BA27F680030EEA8 /* WSAnimationItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52024E041BA27F680030EEA8 /* WSAnimationItemModel.m */; };
 		52060AAF1BA14CC60062AD60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AAE1BA14CC60062AD60 /* main.m */; };
 		52060AB21BA14CC70062AD60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AB11BA14CC70062AD60 /* AppDelegate.m */; };
 		52060AB51BA14CC70062AD60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AB41BA14CC70062AD60 /* ViewController.m */; };
@@ -36,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52024E031BA27F680030EEA8 /* WSAnimationItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationItemModel.h; path = WSAnimationTabView/WSAnimationItemModel.h; sourceTree = "<group>"; };
+		52024E041BA27F680030EEA8 /* WSAnimationItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationItemModel.m; path = WSAnimationTabView/WSAnimationItemModel.m; sourceTree = "<group>"; };
+		52024E061BA27FA40030EEA8 /* WSAnimationItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationItemProtocol.h; path = WSAnimationTabView/WSAnimationItemProtocol.h; sourceTree = "<group>"; };
 		52060AA91BA14CC60062AD60 /* WSSlideTabView-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WSSlideTabView-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52060AAD1BA14CC60062AD60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52060AAE1BA14CC60062AD60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -168,8 +172,11 @@
 			children = (
 				FED763351BA1BA1200DA0C5F /* UIView+Utils.h */,
 				FED763361BA1BA1200DA0C5F /* UIView+Utils.m */,
+				52024E061BA27FA40030EEA8 /* WSAnimationItemProtocol.h */,
 				52060ADF1BA184B20062AD60 /* WSAnimationTabView.h */,
 				52060AE01BA184B20062AD60 /* WSAnimationTabView.m */,
+				52024E031BA27F680030EEA8 /* WSAnimationItemModel.h */,
+				52024E041BA27F680030EEA8 /* WSAnimationItemModel.m */,
 				FED763381BA1BB8A00DA0C5F /* WSAnimationIndicatorView.h */,
 				FED763391BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m */,
 				52060AE61BA18AFB0062AD60 /* WSAnimationItemView.h */,
@@ -288,6 +295,7 @@
 				52060AD71BA14E520062AD60 /* WSSlideTabViewDataSource.m in Sources */,
 				52060AB21BA14CC70062AD60 /* AppDelegate.m in Sources */,
 				52060AAF1BA14CC60062AD60 /* main.m in Sources */,
+				52024E051BA27F680030EEA8 /* WSAnimationItemModel.m in Sources */,
 				52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */,
 				52060AE81BA18AFB0062AD60 /* WSAnimationItemView.m in Sources */,
 				FED763371BA1BA1200DA0C5F /* UIView+Utils.m in Sources */,

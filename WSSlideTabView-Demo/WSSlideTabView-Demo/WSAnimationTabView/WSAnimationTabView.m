@@ -29,29 +29,68 @@
 @end
 
 static NSInteger WSAnimationTabViewItemTag = 101;
+static NSInteger WSAnimationTabIndicatorViewTag = 99;
+//static NSInteger WSAnimationDynamicDamping = 0.7;
 
 @implementation WSAnimationTabView
 {
     CGFloat _totalWidth;
+    WSAnimationItemView *_lastItemView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //添加ScrollView
-        
-        self.animationLabelFont = [UIFont systemFontOfSize:12];
-        [self addSubview:self.scrollView];
-        
+     
+        [self configureView];
     }
     return self;
 }
 
+///ConfigureView
+- (void)configureView
+{
+
+    //添加ScrollView
+    
+    self.animationLabelFont = [UIFont systemFontOfSize:12];
+    
+    self.selectTitleColor = [UIColor whiteColor];
+    self.normalTitleColor = [UIColor redColor];
+    
+    [self addSubview:self.scrollView];
+
+}
+
+- (void)awakeFromNib
+{
+    [self configureView];
+}
+
+- (void)selectItemView: (WSAnimationItemView *)item
+{
+    _lastItemView.selected = NO;
+    
+    item.selected = YES;
+    
+    _lastItemView = item;
+
+}
+#pragma mark - Action
 - (void)itemDidTapped: (WSAnimationItemView *)item
 {
+    //
+    [self selectItemView:item];
     
-    //滑动时判断是否可以制中
+    
+    
+    //invoke delegate method
+    if ([_delegate respondsToSelector:@selector(animationTabViewDidSelectedItem:)]) {
+        [_delegate animationTabViewDidSelectedItem:self.modelArray[item.tag - WSAnimationTabViewItemTag]];
+    }
+    
+    //Judge to scroll
     CGFloat leftEdge =  self.scrollView.centerX;
     CGFloat rightEdge = (self.scrollView.contentSize.width - self.scrollView.centerX);
     
@@ -64,34 +103,81 @@ static NSInteger WSAnimationTabViewItemTag = 101;
         [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
     
-    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.indicatorView setFrame:item.frame];
-    } completion:^(BOOL finished) {
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            _lastItemView.titleLabel.textColor = self.normalTitleColor;
+            item.titleLabel.textColor = self.selectTitleColor;
+        } completion:^(BOOL finished) {
+            
+        }];
         
-    }];
-
-    
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.indicatorView setFrame:item.frame];
+        } completion:^(BOOL finished) {
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.indicatorView setFrame:item.frame];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
-- (void)setTabModelArray:(NSArray *)array
-{
-    self.modelArray = array;
-    
-    [self refreshView];
-}
-
+#pragma mark - Private method
 - (void)refreshView
 {
     
 #if DEBUG
-    NSAssert(self.modelArray.count > 0, @"这里数组不能为空");
+    NSAssert(self.modelArray.count > 0, @"modelArray is nil");
 #endif
-    
+    //change tag start number
+    WSAnimationTabViewItemTag = WSAnimationTabViewItemTag + 200;
+
     //Remove All subviews
     [self.scrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIView *view = obj;
-        [view removeFromSuperview];
+        if (view.tag != WSAnimationTabIndicatorViewTag) {
+            if (view.frame.origin.x < self.width) {
+                if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
+                    [UIView animateWithDuration:0.2 delay:0.1 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                        view.frame = CGRectMake(self.width, 0, view.width, view.height);
+                        
+                    } completion:^(BOOL finished) {
+                        [view removeFromSuperview];
+                    }];
+                    
+                } else {
+                    [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                        
+                        view.frame = CGRectMake(self.width, 0, view.width, view.height);
+                    } completion:^(BOOL finished) {
+                        [view removeFromSuperview];
+                    }];
+                }
+            } else {
+                [view removeFromSuperview];
+            }
+        } else {
+            if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
+                [UIView animateWithDuration:0.2 delay:0.1 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    view.frame = CGRectMake(self.width, 0, view.width, view.height);
+                    
+                } completion:^(BOOL finished) {
+                }];
+                
+            } else {
+                [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                    
+                    view.frame = CGRectMake(self.width, 0, view.width, view.height);
+                } completion:^(BOOL finished) {
+                }];
+            }
+
+        }
     }];
+    
+//    self.indicatorView = nil;
     
     //Remove all cache width
     [self.itemWidthArray removeAllObjects];
@@ -101,10 +187,19 @@ static NSInteger WSAnimationTabViewItemTag = 101;
     //calculate item width
     __block CGFloat totalWidth = 0;
     [self.modelArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *itemTitle = self.modelArray[idx];
-        CGFloat itemWidth = [self itemWidthWithContentString:itemTitle font:self.animationLabelFont];
+        
+        id model = self.modelArray[idx];
+        
+        //Check up model
+        NSAssert([model conformsToProtocol:@protocol(WSAnimationItemProtocol)], @"model must confroms to WSAnimationItemProtocol");
+        
+        id<WSAnimationItemProtocol> itemModel = model;
+        
+        CGFloat itemWidth = [self itemWidthWithContentString:itemModel.titleName font:self.animationLabelFont];
+        
         //get the .2 point value
         itemWidth = [[NSString stringWithFormat:@"%.0f", itemWidth] floatValue];
+        
         [self.itemWidthArray addObject:@(itemWidth)];
         totalWidth += itemWidth;
     }];
@@ -112,11 +207,14 @@ static NSInteger WSAnimationTabViewItemTag = 101;
     //reset contentSize
     [self.scrollView setContentSize:CGSizeMake(totalWidth, self.height)];
     
-    //add indicator view
-    [self.scrollView addSubview:self.indicatorView];
+    if (!self.indicatorView.superview) {
+        //add indicator view
+        [self.scrollView addSubview:self.indicatorView];
+    }
+    
     
     //set default indicator view
-    [self.indicatorView setFrame:CGRectMake(0, 0, [[self.itemWidthArray firstObject] floatValue], self.height)];
+//    [self.indicatorView setFrame:CGRectMake(0, 0, [[self.itemWidthArray firstObject] floatValue], self.height)];
     
     //set buttons
     [self.modelArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -126,24 +224,60 @@ static NSInteger WSAnimationTabViewItemTag = 101;
         if (idx > 0) {
             xOffset = [self xOffsetAtIndex:(idx - 1)];
         }
-
+        
         //Item view
-        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(xOffset, 0, itemWidth, self.height)];
-//        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.scrollView.contentSize.width, 0, itemWidth, self.height)];
+//        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(xOffset, 0, itemWidth, self.height)];
+        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.scrollView.contentSize.width, 0, itemWidth, self.height)];
+        
         itemView.tag = WSAnimationTabViewItemTag + idx;
+        
         [itemView addTarget:self action:@selector(itemDidTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [itemView setItemTitle:self.modelArray[idx]];
-        itemView.alpha = 0;
+        
+        id<WSAnimationItemProtocol> itemModel = self.modelArray[idx];
+        [itemView setItemTitle:itemModel.titleName];
+        [itemView setItemViewFont:self.animationLabelFont];
+        [itemView setNormalTitleColor:self.normalTitleColor];
+        [itemView setSelectTitleColor:self.selectTitleColor];
         
         [self.scrollView addSubview:itemView];
-        [UIView animateWithDuration:0.5 animations:^{
-            itemView.alpha = 1;
-//            itemView.frame = CGRectMake(idx * itemWidth, 0, itemWidth, self.height);
-        }];
+        
+        if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
+            [UIView animateWithDuration:0.8 delay:0.2 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                itemView.frame = CGRectMake(xOffset, 0, itemWidth, self.height);
+                
+            } completion:^(BOOL finished) { }];
+
+        } else {
+            [UIView animateWithDuration:0.3 delay:0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                
+                itemView.frame = CGRectMake(xOffset, 0, itemWidth, self.height);
+            } completion:^(BOOL finished) { }];
+        }
+        
+        
+        if (idx == 0) {
+            if ([_delegate respondsToSelector:@selector(animationTabViewDidSelectedItem:)]) {
+                [_delegate animationTabViewDidSelectedItem:itemModel];
+            }
+            [itemView setSelected:YES];
+            _lastItemView = itemView;
+            
+            if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
+                [UIView animateWithDuration:0.5 delay:0.3 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [self.indicatorView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
+                } completion:^(BOOL finished) { }];
+            } else {
+                [UIView animateWithDuration:0.3 delay:0.5 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                    [self.indicatorView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
+                } completion:^(BOOL finished) { }];
+            }
+            //set default indicator view
+        }
     }];
     
+    
+    
 }
-
 
 ///Reture xOffset
 - (CGFloat)xOffsetAtIndex: (NSInteger)index
@@ -189,13 +323,22 @@ static NSInteger WSAnimationTabViewItemTag = 101;
 }
 
 
+#pragma mark - Setter
+- (void)setTabModelArray:(NSArray *)array
+{
+    self.modelArray = array;
+    
+    [self refreshView];
+}
+
+
+#pragma mark - Getter
 - (UIScrollView *)scrollView
 {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.backgroundColor = [UIColor orangeColor];
     }
     return _scrollView;
 }
@@ -206,7 +349,9 @@ static NSInteger WSAnimationTabViewItemTag = 101;
 #if DEBUG
         NSAssert(self.itemWidthArray.count > 0, @"the itemWidthArray count must > 0");
 #endif
-        _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(0, 0, [self itemWidthAtIndex:0] , self.height)];
+//        _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(0, 0, [self itemWidthAtIndex:0] , self.height)];
+        _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(self.width, 0, [self itemWidthAtIndex:0] , self.height)];
+        _indicatorView.tag = WSAnimationTabIndicatorViewTag;
     }
     return _indicatorView;
 }

@@ -22,11 +22,11 @@
     if (self) {
         
         //set font
-        [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//        [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         //set title color
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+//        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         
     }
     return self;
@@ -37,6 +37,16 @@
     [self.titleLabel setFont:itemViewFont];
 }
 
+- (void)setSelectTitleColor:(UIColor *)selectTitleColor
+{
+    [self setTitleColor:selectTitleColor forState:UIControlStateSelected];
+
+}
+
+- (void)setNormalTitleColor:(UIColor *)normalTitleColor
+{
+    [self setTitleColor:normalTitleColor forState:UIControlStateNormal];
+}
 
 - (void)setItemTitle:(NSString *)title
 {
