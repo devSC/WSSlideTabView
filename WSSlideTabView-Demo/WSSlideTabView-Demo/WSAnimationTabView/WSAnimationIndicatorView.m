@@ -24,6 +24,7 @@ static CGFloat WSAnimationEdgeHeight = 20;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         self.cornerBackGroundViewColor = [UIColor redColor];
         [self addSubview:self.cornerView];
         
@@ -31,6 +32,10 @@ static CGFloat WSAnimationEdgeHeight = 20;
     return self;
 }
 
+- (void)setCornerBackGroundViewColor:(UIColor *)cornerBackGroundViewColor
+{
+    self.cornerView.backgroundColor = cornerBackGroundViewColor;
+}
 
 - (UIView *)cornerView
 {
@@ -43,6 +48,14 @@ static CGFloat WSAnimationEdgeHeight = 20;
         _cornerView.layer.cornerRadius = cornerViewHeight / 2;
     }
     return _cornerView;
+}
+
+- (void)layoutSubviews
+{
+    
+    CGFloat cornerViewHeight = self.height - WSAnimationEdgeHeight;
+    [self.cornerView setFrame:CGRectMake(WSAnimationEdgeWidth / 2, self.centerY - cornerViewHeight/2, self.width - WSAnimationEdgeWidth , cornerViewHeight)];
+  
 }
 
 @end

@@ -55,12 +55,7 @@ static NSInteger WSAnimationTabViewItemTag = 101;
     CGFloat leftEdge =  self.scrollView.centerX;
     CGFloat rightEdge = (self.scrollView.contentSize.width - self.scrollView.centerX);
     
-    
-    //contentSize: {804, 44},
-//    NSLog(@"itemCenterX: %.2f, contentOffset: %@, leftEdge: %.2f, rightEdge: %.2f",item.centerX, NSStringFromCGPoint(self.scrollView.contentOffset), leftEdge, rightEdge);
     if (item.centerX >= leftEdge && item.centerX <= rightEdge) {
-        //这里要考虑最右边的情况.
-//        NSLog(@"offsetX : %f", item.centerX - self.scrollView.centerX);
         [self.scrollView setContentOffset:CGPointMake(item.centerX - self.scrollView.centerX, 0) animated:YES];
     } else if (item.centerX > rightEdge){
         
@@ -69,8 +64,8 @@ static NSInteger WSAnimationTabViewItemTag = 101;
         [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
     
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [self.indicatorView setFrame:item.frame];
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.indicatorView setFrame:item.frame];
     } completion:^(BOOL finished) {
         
     }];
@@ -108,6 +103,8 @@ static NSInteger WSAnimationTabViewItemTag = 101;
     [self.modelArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *itemTitle = self.modelArray[idx];
         CGFloat itemWidth = [self itemWidthWithContentString:itemTitle font:self.animationLabelFont];
+        //get the .2 point value
+        itemWidth = [[NSString stringWithFormat:@"%.0f", itemWidth] floatValue];
         [self.itemWidthArray addObject:@(itemWidth)];
         totalWidth += itemWidth;
     }];
@@ -124,24 +121,43 @@ static NSInteger WSAnimationTabViewItemTag = 101;
     //set buttons
     [self.modelArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        
-        
         CGFloat itemWidth = [self itemWidthAtIndex:idx];
+        CGFloat xOffset = 0;
+        if (idx > 0) {
+            xOffset = [self xOffsetAtIndex:(idx - 1)];
+        }
+
         //Item view
-//        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(idx * itemWidth, 0, itemWidth, self.height)];
-        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.scrollView.contentSize.width, 0, itemWidth, self.height)];
+        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(xOffset, 0, itemWidth, self.height)];
+//        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.scrollView.contentSize.width, 0, itemWidth, self.height)];
         itemView.tag = WSAnimationTabViewItemTag + idx;
         [itemView addTarget:self action:@selector(itemDidTapped:) forControlEvents:UIControlEventTouchUpInside];
         [itemView setItemTitle:self.modelArray[idx]];
-        [self.scrollView addSubview:itemView];
+        itemView.alpha = 0;
         
-        [UIView animateWithDuration:0.3 animations:^{
-            itemView.frame = CGRectMake(idx * itemWidth, 0, itemWidth, self.height);
+        [self.scrollView addSubview:itemView];
+        [UIView animateWithDuration:0.5 animations:^{
+            itemView.alpha = 1;
+//            itemView.frame = CGRectMake(idx * itemWidth, 0, itemWidth, self.height);
         }];
     }];
     
 }
 
+
+///Reture xOffset
+- (CGFloat)xOffsetAtIndex: (NSInteger)index
+{
+    __block CGFloat xOffset = 0;
+    [self.itemWidthArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx > index) {
+            *stop = YES;
+        } else {
+            xOffset += [obj floatValue];
+        }
+    }];
+    return xOffset;
+}
 - (CGFloat)itemWidthWithContentString: (NSString *)string font: (UIFont *)font
 {
     CGSize constraintSize = CGSizeMake([self valueByScreenScale:200], [self valueByScreenScale:300]);

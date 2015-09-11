@@ -23,6 +23,7 @@
         
         //set font
         [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         //set title color
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -31,16 +32,21 @@
     return self;
 }
 
+- (void)setItemViewFont:(UIFont *)itemViewFont
+{
+    [self.titleLabel setFont:itemViewFont];
+}
+
 
 - (void)setItemTitle:(NSString *)title
 {
     [self setTitle:title forState:UIControlStateNormal];
     
 }
-//- (CGRect)titleRectForContentRect:(CGRect)contentRect
-//{
-//    return CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
-//}
+- (CGRect)titleRectForContentRect:(CGRect)contentRect
+{
+    return contentRect;
+}
 #pragma mark - Init
 
 

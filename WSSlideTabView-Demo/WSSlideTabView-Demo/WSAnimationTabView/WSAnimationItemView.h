@@ -11,6 +11,8 @@
 
 @interface WSAnimationItemView : WSAnimationTabButton
 
+///Set Button font
+@property (nonatomic, strong) UIFont *itemViewFont; //Default System 12 size
 
 - (void)setItemTitle: (NSString *)title;
 

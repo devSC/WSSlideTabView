@@ -18,7 +18,6 @@
 
 @implementation ViewController
 {
-    NSArray *_array;
     WSSlideTabView *slideTabView;
     WSAnimationTabView *animationTabView;
 }
@@ -27,8 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 //    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造"];
-      NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"全部分类", @"美食园艺", @"旧物改造", @"全部分类"];
-    _array = array;
+      NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"粘土/陶艺", @"刺绣编织", @"创意DIY", @"手工皮具", @"羊毛毡", @"电子科技", @"美容护肤"];
     
     slideTabView = [[WSSlideTabView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 44)];
     [self.view addSubview:slideTabView];
