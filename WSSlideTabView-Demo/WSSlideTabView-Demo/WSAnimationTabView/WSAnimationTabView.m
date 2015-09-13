@@ -58,6 +58,8 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
     
     self.selectTitleColor = [UIColor whiteColor];
     self.normalTitleColor = [UIColor redColor];
+    self.scrollViewBackgroundColor = [UIColor whiteColor];
+    self.indicatorBackgroundColor = [UIColor redColor];
     
     [self addSubview:self.scrollView];
 
@@ -214,7 +216,6 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
     
     
     //set default indicator view
-//    [self.indicatorView setFrame:CGRectMake(0, 0, [[self.itemWidthArray firstObject] floatValue], self.height)];
     
     //set buttons
     [self.modelArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -227,7 +228,7 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
         
         //Item view
 //        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(xOffset, 0, itemWidth, self.height)];
-        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.scrollView.contentSize.width, 0, itemWidth, self.height)];
+        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.width, 0, itemWidth, self.height)];
         
         itemView.tag = WSAnimationTabViewItemTag + idx;
         
