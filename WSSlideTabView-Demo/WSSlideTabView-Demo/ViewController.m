@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "WSSlideTabView.h"
 
 #import "WSAnimationTabView.h"
 #import "WSAnimationItemModel.h"
@@ -21,14 +20,13 @@
 
 @implementation ViewController
 {
-    WSSlideTabView *slideTabView;
     WSAnimationTabView *animationTabView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"粘土/陶艺", @"刺绣编织", @"创意DIY", @"手工皮具", @"羊毛毡", @"电子科技", @"美容护肤"];
+    NSArray *array = @[@"Top", @"Entertain", @"Biz", @"Tech", @"World", @"Social", @"TIME", @"Atlanta", @"China", @"Beijing"];
     
     NSMutableArray *mArray = [NSMutableArray array];
     
@@ -37,11 +35,6 @@
         model.titleName = str;
         [mArray addObject:model];
     }
-    
-    slideTabView = [[WSSlideTabView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 44)];
-    [self.view addSubview:slideTabView];
-    
-    [slideTabView setSlideModels:array];
     
     animationTabView = [[WSAnimationTabView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 44)];
     [self.view addSubview:animationTabView];
