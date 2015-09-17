@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) NSMutableArray *itemWidthArray;
 
+@property (nonatomic, strong) UIView *maskView;
+
 @property (nonatomic) NSUInteger selectItemIdx;
 @end
 
@@ -104,6 +106,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     
     [UIView wsAnimateWithDuration:0.5 delay:0 usingSpringWithDamping:WSAnimationTabViewSpringDamping initialSpringVelocity:WSAnimationTabViewSpringVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.indicatorView setFrame:item.frame];
+//        self.maskView.frame = item.frame;
         
     } completion:^(BOOL finished) {
         
@@ -146,16 +149,15 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         
         //调整tag
         __block NSUInteger index = 0;
-        [self.scrollView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.scrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
-            if (obj.tag != WSAnimationTabIndicatorViewTag) {
+            UIView *view = obj;
+            if (view.tag != WSAnimationTabIndicatorViewTag) {
+                
                 WSAnimationTabButton *tabBtn = obj;
-                
-                NSLog(@"oldtag: %ld",tabBtn.tag);
                 tabBtn.tag = WSAnimationTabViewItemTag + index;
-                
-                NSLog(@"newtag: %ld \n\n\n",tabBtn.tag);
                 index ++;
+                
             }
         }];
         
@@ -250,9 +252,9 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         //调整tag
         
         __block NSUInteger index = 0;
-        [self.scrollView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if (obj.tag != WSAnimationTabIndicatorViewTag) {
+        [self.scrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIView *view = obj;
+            if (view.tag != WSAnimationTabIndicatorViewTag) {
                 WSAnimationTabButton *tabBtn = obj;
                 
                 //                NSLog(@"oldtag: %ld",tabBtn.tag);
@@ -262,7 +264,6 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
                 index ++;
             }
         }];
-        
         //其他的向前放
         
         //遍历之后的btn
@@ -296,7 +297,6 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
 #if DEBUG
     NSAssert(self.modelArray.count > 0, @"modelArray is nil");
 #endif
-    NSLog(@"subviewCount: %ld", self.scrollView.subviews.count);
     
     //change tag start number
     WSAnimationTabViewItemTag = WSAnimationTabViewItemTag + 200;
@@ -376,19 +376,15 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         }];
         
         if (idx == 0) {
-            //            if ([_delegate respondsToSelector:@selector(animationTabViewDidSelectedItem:)]) {
-            //                [_delegate animationTabViewDidSelectedItem:itemModel];
-            //            }
-            //            [itemView setSelected:YES];
-            //            self.selectItemIdx = 0;
-            //
-            //            _lastItemView = itemView;
             
             [self selectItemAtIndex:0];
             
             self.indicatorView.alpha = 0;
             [UIView wsAnimateWithDuration:0.5 delay:0.3 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self.indicatorView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
+                
+//                [self.maskView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
+
                 self.indicatorView.alpha = 1;
             } completion:^(BOOL finished) {
                 
@@ -511,6 +507,12 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
 }
 
 
+- (CGFloat)itemWidthAtIndex: (NSInteger)index
+{
+    return [self.itemWidthArray[index] floatValue];
+}
+
+
 #pragma mark - Setter
 - (void)setTabModelArray:(NSArray *)array
 {
@@ -532,6 +534,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.bounces = NO;
+//        _scrollView.layer.mask = self.maskView.layer;
     }
     return _scrollView;
 }
@@ -550,10 +553,15 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     return _indicatorView;
 }
 
-- (CGFloat)itemWidthAtIndex: (NSInteger)index
+- (UIView *)maskView
 {
-    return [self.itemWidthArray[index] floatValue];
+    if (!_maskView) {
+        _maskView = [[UIView alloc] init];
+        _maskView.backgroundColor = [UIColor yellowColor];
+    }
+    return _maskView;
 }
+
 
 - (NSMutableArray *)itemWidthArray
 {
