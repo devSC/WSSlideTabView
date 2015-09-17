@@ -133,6 +133,8 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
 #if DEBUG
     NSAssert(self.modelArray.count > 0, @"modelArray is nil");
 #endif
+    NSLog(@"subviewCount: %ld", self.scrollView.subviews.count);
+    
     //change tag start number
     WSAnimationTabViewItemTag = WSAnimationTabViewItemTag + 200;
 

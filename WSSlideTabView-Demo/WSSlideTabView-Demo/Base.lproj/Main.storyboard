@@ -55,6 +55,7 @@
                             <constraint firstItem="wBU-Ms-0qf" firstAttribute="top" secondItem="4bt-ar-bQ2" secondAttribute="bottom" constant="3" id="wzJ-uy-Oy2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="bSz-Ru-XBc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="animationTabView" destination="wBU-Ms-0qf" id="vju-5h-IkP"/>
