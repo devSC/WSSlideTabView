@@ -106,8 +106,9 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     
     [UIView wsAnimateWithDuration:0.5 delay:0 usingSpringWithDamping:WSAnimationTabViewSpringDamping initialSpringVelocity:WSAnimationTabViewSpringVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.indicatorView setFrame:item.frame];
-//        self.maskView.frame = item.frame;
         
+        [self.indicatorView layoutSubviews];
+//        self.maskView.frame = item.frame;
     } completion:^(BOOL finished) {
         
     }];
@@ -356,6 +357,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         [itemView setItemViewFont:self.animationLabelFont];
         [itemView setNormalTitleColor:self.normalTitleColor];
         [itemView setSelectTitleColor:self.selectTitleColor];
+//        itemView.backgroundColor = [UIColor blueColor];
         
         [self.scrollView addSubview:itemView];
         
@@ -374,7 +376,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
             [UIView wsAnimateWithDuration:0.5 delay:0.3 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self.indicatorView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
                 
-//                [self.maskView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
+                [self.maskView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
 
                 self.indicatorView.alpha = 1;
             } completion:^(BOOL finished) {
@@ -382,6 +384,9 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
             }];
         }
     }];
+    
+    
+//    self.scrollView.layer.mask = self.maskView.layer;
     
     
     
@@ -525,7 +530,6 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.bounces = NO;
-//        _scrollView.layer.mask = self.maskView.layer;
     }
     return _scrollView;
 }
@@ -548,7 +552,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
 {
     if (!_maskView) {
         _maskView = [[UIView alloc] init];
-        _maskView.backgroundColor = [UIColor yellowColor];
+        _maskView.backgroundColor = [UIColor blackColor];
     }
     return _maskView;
 }
