@@ -30,7 +30,6 @@
 
 static NSInteger WSAnimationTabViewItemTag = 101;
 static NSInteger WSAnimationTabIndicatorViewTag = 99;
-//static NSInteger WSAnimationDynamicDamping = 0.7;
 
 @implementation WSAnimationTabView
 {
@@ -51,11 +50,8 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
 ///ConfigureView
 - (void)configureView
 {
-
-    //添加ScrollView
     
     self.animationLabelFont = [UIFont systemFontOfSize:12];
-    
     self.selectTitleColor = [UIColor whiteColor];
     self.normalTitleColor = [UIColor redColor];
     self.scrollViewBackgroundColor = [UIColor whiteColor];
@@ -106,22 +102,20 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
     }
     
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
-        [UIView animateWithDuration:0.3 animations:^{
-            _lastItemView.titleLabel.textColor = self.normalTitleColor;
-            item.titleLabel.textColor = self.selectTitleColor;
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        _lastItemView.titleLabel.textColor = self.normalTitleColor;
+        item.titleLabel.textColor = self.selectTitleColor;
+
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.indicatorView setFrame:item.frame];
         } completion:^(BOOL finished) {
         }];
     } else {
+        _lastItemView.titleLabel.textColor = self.normalTitleColor;
+        item.titleLabel.textColor = self.selectTitleColor;
+
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.indicatorView setFrame:item.frame];
         } completion:^(BOOL finished) {
-            
         }];
     }
 }
@@ -229,7 +223,6 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
         }
         
         //Item view
-//        WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(xOffset, 0, itemWidth, self.height)];
         WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.width, 0, itemWidth, self.height)];
         
         itemView.tag = WSAnimationTabViewItemTag + idx;
@@ -274,7 +267,6 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
                     [self.indicatorView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
                 } completion:^(BOOL finished) { }];
             }
-            //set default indicator view
         }
     }];
     
@@ -357,7 +349,6 @@ static NSInteger WSAnimationTabIndicatorViewTag = 99;
 #if DEBUG
         NSAssert(self.itemWidthArray.count > 0, @"the itemWidthArray count must > 0");
 #endif
-//        _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(0, 0, [self itemWidthAtIndex:0] , self.height)];
         _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(self.width, 0, [self itemWidthAtIndex:0] , self.height)];
         _indicatorView.tag = WSAnimationTabIndicatorViewTag;
         _indicatorView.cornerBackGroundViewColor = self.indicatorBackgroundColor;
