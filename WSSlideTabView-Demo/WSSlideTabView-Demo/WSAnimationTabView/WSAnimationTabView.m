@@ -114,12 +114,6 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
 }
 - (void)deleteSelectItem:(id<WSAnimationItemProtocol>)item
 {
-    //删除选中的按钮
-    
-    //将后面的往前面调换
-    
-    //选中后面的按钮
-    
     //找到index
     NSUInteger itemIndex = [self.modelArray indexOfObject:item];
     
@@ -137,11 +131,8 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     [UIView animateWithDuration:0.3 animations:^{
         itemBtn.alpha = 0;
         
-        //        NSLog(@"contentSize: %@ ", NSStringFromCGSize(self.scrollView.contentSize));
         //调整contentSize
         [self.scrollView setContentSize:CGSizeMake([self scrollViewContentWidth], self.height)];
-        
-        //        NSLog(@"new: contentSize: %@ ", NSStringFromCGSize(self.scrollView.contentSize));
         
         
     } completion:^(BOOL finished) {
