@@ -27,10 +27,17 @@
 
 - (void)setTabModelArray: (NSArray *)array;
 
+- (void)deleteItem: (id<WSAnimationItemProtocol>)item;
+- (void)deleteSelectItem: (id<WSAnimationItemProtocol>)item;
+
 @end
 
 @protocol WSAnimationTabViewDelegate <NSObject>
 
+- (void)animationTabViewDidSelectedItemAtIndex: (NSUInteger)index;
+
 - (void)animationTabViewDidSelectedItem: (id<WSAnimationItemProtocol>)item;
+
+- (void)animationTabViewDidDeleteAllItem;
 
 @end

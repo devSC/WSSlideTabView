@@ -19,6 +19,7 @@
 		52060AE11BA184B20062AD60 /* WSAnimationTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE01BA184B20062AD60 /* WSAnimationTabView.m */; };
 		52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */; };
 		52060AE81BA18AFB0062AD60 /* WSAnimationItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */; };
+		524EF8EC1BAA88400032B4D0 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EF8EB1BAA88400032B4D0 /* UIView+Animation.m */; settings = {ASSET_TAGS = (); }; };
 		FED763371BA1BA1200DA0C5F /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = FED763361BA1BA1200DA0C5F /* UIView+Utils.m */; };
 		FED7633A1BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = FED763391BA1BB8A00DA0C5F /* WSAnimationIndicatorView.m */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,8 @@
 		52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationTabButton.m; path = WSAnimationTabView/WSAnimationTabButton.m; sourceTree = "<group>"; };
 		52060AE61BA18AFB0062AD60 /* WSAnimationItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationItemView.h; path = WSAnimationTabView/WSAnimationItemView.h; sourceTree = "<group>"; };
 		52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSAnimationItemView.m; path = WSAnimationTabView/WSAnimationItemView.m; sourceTree = "<group>"; };
+		524EF8EA1BAA88400032B4D0 /* UIView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Animation.h"; path = "WSAnimationTabView/UIView+Animation.h"; sourceTree = "<group>"; };
+		524EF8EB1BAA88400032B4D0 /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Animation.m"; path = "WSAnimationTabView/UIView+Animation.m"; sourceTree = "<group>"; };
 		FED763351BA1BA1200DA0C5F /* UIView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utils.h"; sourceTree = "<group>"; };
 		FED763361BA1BA1200DA0C5F /* UIView+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utils.m"; sourceTree = "<group>"; };
 		FED763381BA1BB8A00DA0C5F /* WSAnimationIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSAnimationIndicatorView.h; path = WSAnimationTabView/WSAnimationIndicatorView.h; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 				52060AE71BA18AFB0062AD60 /* WSAnimationItemView.m */,
 				52060AE31BA18A430062AD60 /* WSAnimationTabButton.h */,
 				52060AE41BA18A430062AD60 /* WSAnimationTabButton.m */,
+				524EF8EA1BAA88400032B4D0 /* UIView+Animation.h */,
+				524EF8EB1BAA88400032B4D0 /* UIView+Animation.m */,
 			);
 			name = WSAnimationTabView;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 				52060AB51BA14CC70062AD60 /* ViewController.m in Sources */,
 				52024E081BA2BCBF0030EEA8 /* README.md in Sources */,
 				52060AB21BA14CC70062AD60 /* AppDelegate.m in Sources */,
+				524EF8EC1BAA88400032B4D0 /* UIView+Animation.m in Sources */,
 				52060AAF1BA14CC60062AD60 /* main.m in Sources */,
 				52024E051BA27F680030EEA8 /* WSAnimationItemModel.m in Sources */,
 				52060AE51BA18A430062AD60 /* WSAnimationTabButton.m in Sources */,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -42,16 +42,31 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euc-En-E0Y">
+                                <rect key="frame" x="26" y="617" width="323" height="30"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.3411764706" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="DeleteItem">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteItem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xAy-oo-6kY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wBU-Ms-0qf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="131-3o-kgt"/>
                             <constraint firstItem="59u-d2-b9B" firstAttribute="top" secondItem="wBU-Ms-0qf" secondAttribute="bottom" constant="55" id="6TJ-z0-z5E"/>
                             <constraint firstItem="59u-d2-b9B" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="DeY-g6-xAt"/>
+                            <constraint firstItem="euc-En-E0Y" firstAttribute="top" secondItem="59u-d2-b9B" secondAttribute="bottom" constant="7" id="E8S-6B-jqu"/>
                             <constraint firstAttribute="trailing" secondItem="wBU-Ms-0qf" secondAttribute="trailing" id="HRT-xy-PqI"/>
+                            <constraint firstItem="euc-En-E0Y" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="6" id="P6O-RI-9W6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="euc-En-E0Y" secondAttribute="trailing" constant="6" id="SXm-Ca-Lh3"/>
                             <constraint firstItem="4bt-ar-bQ2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-6" id="aL5-ox-JPT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="59u-d2-b9B" secondAttribute="trailing" constant="10" id="bh7-0C-ra8"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="59u-d2-b9B" secondAttribute="bottom" constant="57" id="hkW-ZG-2CP"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="euc-En-E0Y" secondAttribute="bottom" constant="20" id="iHW-V4-J2Y"/>
                             <constraint firstItem="wBU-Ms-0qf" firstAttribute="top" secondItem="4bt-ar-bQ2" secondAttribute="bottom" constant="3" id="wzJ-uy-Oy2"/>
                         </constraints>
                     </view>

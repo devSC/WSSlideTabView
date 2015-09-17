@@ -21,14 +21,17 @@
 @implementation ViewController
 {
     WSAnimationTabView *animationTabView;
+    NSMutableArray *mArray;
+    WSAnimationItemModel *currentModel;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSArray *array = @[@"Top", @"Entertain", @"Biz", @"Tech", @"World", @"Social", @"TIME", @"Atlanta", @"China", @"Beijing"];
+//    NSArray *array = @[@"Top", @"Entertain", @"Biz"];
     
-    NSMutableArray *mArray = [NSMutableArray array];
+    mArray = [NSMutableArray array];
     
     for (NSString *str in array) {
         WSAnimationItemModel *model = [[WSAnimationItemModel alloc] init];
@@ -38,13 +41,10 @@
     
     animationTabView = [[WSAnimationTabView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 44)];
     [self.view addSubview:animationTabView];
-//    animationTabView.delegate = self;
+    animationTabView.delegate = self;
 
     
     [animationTabView setTabModelArray:mArray];
-    
-
-
     
 }
 - (IBAction)changeItem:(id)sender {
@@ -65,11 +65,23 @@
 //    [animationTabView setTabModelArray:mArray];
     [self.nibTabView setTabModelArray:mArray];
 }
+- (IBAction)deleteItem:(id)sender {
+    
+//    NSUInteger index = arc4random() % mArray.count;
+    
+//    WSAnimationItemModel *model = mArray[index];
+    
+//    [animationTabView deleteItem:currentModel];
+    [animationTabView deleteSelectItem:currentModel];
+    
+    [mArray removeObject:currentModel];
+}
 
 - (void)animationTabViewDidSelectedItem:(id<WSAnimationItemProtocol>)item
 {
-    WSAnimationItemModel *model = item;
-    NSLog(@"item: %@", model.titleName);
+    currentModel = item;
+    NSLog(@"select title: %@", currentModel.titleName);
+    
 }
 
 - (void)didReceiveMemoryWarning {
