@@ -13,5 +13,8 @@
 //default is red
 @property (nonatomic, strong) UIColor *cornerBackGroundViewColor;
 
+@property (nonatomic) CGFloat cornerViewEdgeHeight;
+
+@property (nonatomic) CGFloat cornerViewRadius;
 
 @end

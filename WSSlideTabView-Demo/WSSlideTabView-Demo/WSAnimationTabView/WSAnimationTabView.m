@@ -31,9 +31,11 @@
 @property (nonatomic, strong) UIView *maskView;
 
 @property (nonatomic) NSUInteger selectItemIdx;
+
+@property (nonatomic) NSUInteger animationTabViewItemTag;
 @end
 
-static NSInteger WSAnimationTabViewItemTag = 101;
+//static NSInteger WSAnimationTabViewItemTag = 101;
 static NSInteger WSAnimationTabIndicatorViewTag = 99;
 static CGFloat const WSAnimationTabViewSpringDamping = 0.8;
 static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
@@ -63,6 +65,8 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     self.scrollViewBackgroundColor = [UIColor whiteColor];
     self.indicatorBackgroundColor = [UIColor redColor];
     
+    self.animationTabViewItemTag = 101;
+    
     [self addSubview:self.scrollView];
     
 }
@@ -72,19 +76,11 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     [self configureView];
 }
 
-- (void)selectItemView: (WSAnimationItemView *)item
-{
-    _lastItemView.selected = NO;
-    
-    item.selected = YES;
-    
-    _lastItemView = item;
-    
-}
+
 #pragma mark - Action
 - (void)itemDidTapped: (WSAnimationItemView *)item
 {
-    [self selectItemAtIndex:(item.tag - WSAnimationTabViewItemTag)];
+    [self selectItemAtIndex:(item.tag - self.animationTabViewItemTag)];
     
     //Judge to scroll
     CGFloat leftEdge =  self.scrollView.centerX;
@@ -119,7 +115,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     NSUInteger itemIndex = [self.modelArray indexOfObject:item];
     
     //找到tag
-    NSUInteger buttonTag = WSAnimationTabViewItemTag + itemIndex;
+    NSUInteger buttonTag = self.animationTabViewItemTag + itemIndex;
     //找到这个button
     WSAnimationTabButton *itemBtn = (WSAnimationTabButton *)[self viewWithTag:buttonTag];
     
@@ -147,7 +143,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
             if (view.tag != WSAnimationTabIndicatorViewTag) {
                 
                 WSAnimationTabButton *tabBtn = obj;
-                tabBtn.tag = WSAnimationTabViewItemTag + index;
+                tabBtn.tag = self.animationTabViewItemTag + index;
                 index ++;
                 
             }
@@ -177,7 +173,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
 {
     //向前放.
     //找到tag
-    NSUInteger buttonTag = WSAnimationTabViewItemTag + index;
+    NSUInteger buttonTag = self.animationTabViewItemTag + index;
     //找到这个button
     WSAnimationTabButton *lastItemBtn = (WSAnimationTabButton *)[self viewWithTag:buttonTag];
     CGFloat xOffset = [self xOffsetAtIndex:(index - 1)];
@@ -204,6 +200,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
                            animations:^{
                                
                                [self.indicatorView setFrame:lastItemBtn.frame];
+                               [self.indicatorView layoutSubviews];
                                
                            } completion:^(BOOL finished) {
                                
@@ -211,16 +208,13 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
     }
     
 }
-
-
-
 - (void)deleteItem:(id<WSAnimationItemProtocol>)item
 {
     //找到index
     NSUInteger itemIndex = [self.modelArray indexOfObject:item];
     
     //找到tag
-    NSUInteger buttonTag = WSAnimationTabViewItemTag + itemIndex;
+    NSUInteger buttonTag = self.animationTabViewItemTag + itemIndex;
     //找到这个button
     WSAnimationTabButton *itemBtn = (WSAnimationTabButton *)[self viewWithTag:buttonTag];
     
@@ -250,7 +244,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
                 WSAnimationTabButton *tabBtn = obj;
                 
                 //                NSLog(@"oldtag: %ld",tabBtn.tag);
-                tabBtn.tag = WSAnimationTabViewItemTag + index;
+                tabBtn.tag = self.animationTabViewItemTag + index;
                 
                 //                NSLog(@"newtag: %ld \n\n\n",tabBtn.tag);
                 index ++;
@@ -262,7 +256,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         for (NSInteger i = itemIndex; i < self.modelArray.count; i ++) {
             //向前放.
             //找到tag
-            NSUInteger buttonTag = WSAnimationTabViewItemTag + i;
+            NSUInteger buttonTag = self.animationTabViewItemTag + i;
             //找到这个button
             WSAnimationTabButton *lastItemBtn = (WSAnimationTabButton *)[self viewWithTag:buttonTag];
             CGFloat xOffset = [self xOffsetAtIndex:(i - 1)];
@@ -291,7 +285,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
 #endif
     
     //change tag start number
-    WSAnimationTabViewItemTag = WSAnimationTabViewItemTag + 200;
+    self.animationTabViewItemTag = self.animationTabViewItemTag + 200;
     
     //Remove All subviews
     [self.scrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -348,7 +342,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         //Item view
         WSAnimationItemView *itemView = [[WSAnimationItemView alloc] initWithFrame:CGRectMake(self.width, 0, itemWidth, self.height)];
         
-        itemView.tag = WSAnimationTabViewItemTag + idx;
+        itemView.tag = self.animationTabViewItemTag + idx;
         
         [itemView addTarget:self action:@selector(itemDidTapped:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -375,7 +369,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
             self.indicatorView.alpha = 0;
             [UIView wsAnimateWithDuration:0.5 delay:0.3 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self.indicatorView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
-                
+                [self.indicatorView layoutSubviews];
                 [self.maskView setFrame:CGRectMake(0, 0, itemWidth, self.height)];
 
                 self.indicatorView.alpha = 1;
@@ -384,12 +378,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
             }];
         }
     }];
-    
-    
 //    self.scrollView.layer.mask = self.maskView.layer;
-    
-    
-    
 }
 
 - (void)selectItemAtIndex: (NSUInteger)index
@@ -400,6 +389,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         
         [UIView wsAnimateWithDuration:0.5 delay:0.3 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
             [self.indicatorView setFrame:indicatorViewFrame];
+            [self.indicatorView layoutSubviews];
             self.indicatorView.alpha = 0;
         } completion:^(BOOL finished) {
             if ([_delegate respondsToSelector:@selector(animationTabViewDidDeleteAllItem)]) {
@@ -408,7 +398,7 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         }];
     } else {
         //得到view
-        NSUInteger buttonTag = WSAnimationTabViewItemTag + index;
+        NSUInteger buttonTag = self.animationTabViewItemTag + index;
         id <WSAnimationItemProtocol> itemModel = [self.modelArray objectAtIndex:index];
         
         if ([_delegate respondsToSelector:@selector(animationTabViewDidSelectedItem:)]) {
@@ -543,7 +533,8 @@ static CGFloat const WSAnimationTabViewSpringVelocity = 0.8;
         _indicatorView = [[WSAnimationIndicatorView alloc] initWithFrame:CGRectMake(self.width, 0, [self itemWidthAtIndex:0] , self.height)];
         _indicatorView.tag = WSAnimationTabIndicatorViewTag;
         _indicatorView.cornerBackGroundViewColor = self.indicatorBackgroundColor;
-        
+        _indicatorView.cornerViewRadius = self.indicatorCornerRadius;
+        _indicatorView.cornerViewEdgeHeight = self.indicatorViewEdgeHeight;
     }
     return _indicatorView;
 }

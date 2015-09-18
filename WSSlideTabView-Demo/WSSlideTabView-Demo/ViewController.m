@@ -50,7 +50,8 @@
     [self.view addSubview:animationTabView];
     animationTabView.delegate = self;
 
-    
+    animationTabView.indicatorCornerRadius = 3;
+    animationTabView.indicatorViewEdgeHeight = 20;
     [animationTabView setTabModelArray:mArray];
     
     
@@ -89,19 +90,19 @@
         
     NSArray *array = @[@"全部分类", @"美食园艺", @"旧物改造", @"粘土/陶艺", @"刺绣编织", @"创意DIY", @"手工皮具", @"羊毛毡", @"电子科技", @"美容护肤"];
     
-    NSMutableArray *mArray = [NSMutableArray array];
+    NSMutableArray *mArrays = [NSMutableArray array];
     
     for (NSString *str in array) {
         WSAnimationItemModel *model = [[WSAnimationItemModel alloc] init];
         model.titleName = str;
-        [mArray addObject:model];
+        [mArrays addObject:model];
     }
 
 //    [mArray removeObjectAtIndex:arc];
 //    [animationTabView setTabModelArray:mArray];
     //    [animationTabView setItemWidth:67];
 //    [animationTabView setTabModelArray:mArray];
-    [self.nibTabView setTabModelArray:mArray];
+    [self.nibTabView setTabModelArray:mArrays];
 }
 - (IBAction)deleteItem:(id)sender {
     

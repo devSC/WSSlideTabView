@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -37,15 +37,20 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="QFf-m5-0d4"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="indicatorCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lode from Nib:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bt-ar-bQ2">
-                                <rect key="frame" x="10" y="466" width="87" height="15.5"/>
+                                <rect key="frame" x="10" y="466" width="87" height="16"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euc-En-E0Y">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euc-En-E0Y">
                                 <rect key="frame" x="26" y="617" width="323" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.3411764706" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,7 +72,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wBU-Ms-0qf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="131-3o-kgt"/>
+                            <constraint firstItem="euc-En-E0Y" firstAttribute="leading" secondItem="59u-d2-b9B" secondAttribute="leading" id="5c7-Vw-JQY"/>
                             <constraint firstItem="59u-d2-b9B" firstAttribute="top" secondItem="wBU-Ms-0qf" secondAttribute="bottom" constant="55" id="6TJ-z0-z5E"/>
+                            <constraint firstItem="euc-En-E0Y" firstAttribute="width" secondItem="59u-d2-b9B" secondAttribute="width" id="6wU-81-5mp"/>
                             <constraint firstItem="59u-d2-b9B" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="DeY-g6-xAt"/>
                             <constraint firstItem="euc-En-E0Y" firstAttribute="top" secondItem="59u-d2-b9B" secondAttribute="bottom" constant="7" id="E8S-6B-jqu"/>
                             <constraint firstAttribute="trailing" secondItem="wBU-Ms-0qf" secondAttribute="trailing" id="HRT-xy-PqI"/>
@@ -79,6 +86,12 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="euc-En-E0Y" secondAttribute="bottom" constant="20" id="iHW-V4-J2Y"/>
                             <constraint firstItem="wBU-Ms-0qf" firstAttribute="top" secondItem="4bt-ar-bQ2" secondAttribute="bottom" constant="3" id="wzJ-uy-Oy2"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="P6O-RI-9W6"/>
+                                <exclude reference="SXm-Ca-Lh3"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bSz-Ru-XBc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

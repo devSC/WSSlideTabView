@@ -23,6 +23,10 @@
 
 @property (nonatomic, strong) UIColor *indicatorBackgroundColor; //Default red
 
+@property (nonatomic) CGFloat indicatorCornerRadius;
+
+@property (nonatomic) CGFloat indicatorViewEdgeHeight;
+
 @property (nonatomic, weak) id<WSAnimationTabViewDelegate> delegate;
 
 - (void)setTabModelArray: (NSArray *)array;

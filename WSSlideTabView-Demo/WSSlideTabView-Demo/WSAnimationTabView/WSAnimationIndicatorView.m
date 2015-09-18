@@ -41,7 +41,7 @@ static CGFloat WSAnimationEdgeHeight = 20;
 - (UIView *)cornerView
 {
     if (!_cornerView) {
-        CGFloat cornerViewHeight = self.height - WSAnimationEdgeHeight;
+        CGFloat cornerViewHeight = self.height - self.cornerViewEdgeHeight;
         
         _cornerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width - WSAnimationEdgeWidth , cornerViewHeight)];
         _cornerView.center = self.center;
@@ -51,10 +51,14 @@ static CGFloat WSAnimationEdgeHeight = 20;
     return _cornerView;
 }
 
+- (void)setCornerViewRadius:(CGFloat)cornerViewRadius
+{
+    self.cornerView.layer.cornerRadius = cornerViewRadius;
+}
 - (void)layoutSubviews
 {
     
-    CGFloat cornerViewHeight = self.height - WSAnimationEdgeHeight;
+    CGFloat cornerViewHeight = self.height - self.cornerViewEdgeHeight;
     [self.cornerView setFrame:CGRectMake(WSAnimationEdgeWidth / 2, self.centerY - cornerViewHeight/2, self.width - WSAnimationEdgeWidth , cornerViewHeight)];
   
 }
